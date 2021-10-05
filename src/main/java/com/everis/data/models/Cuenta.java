@@ -21,6 +21,8 @@ public class Cuenta {
 	private Long id;
 	private String nombre_usuario;
 	private String contrasena;
+	private byte tipo_usuario;
+	private boolean activo;
 
 	//Fechas
 	@Column(updatable=false)
@@ -33,7 +35,7 @@ public class Cuenta {
 	private Date updatedAt;
  
 	
-	
+	 
 		
 	public Cuenta() {
 		super();
@@ -41,10 +43,11 @@ public class Cuenta {
 
 
 
-	public Cuenta(String nombre_usuario, String contraseña) {
+	public Cuenta(String nombre_usuario, String contraseña, byte tipo_usuario) {
 		super();
 		this.nombre_usuario = nombre_usuario;
 		this.contrasena = contraseña;
+		this.tipo_usuario=tipo_usuario;
 	}
 
 
@@ -72,13 +75,38 @@ public class Cuenta {
 
 
 
-	public String getContraseña() {
+	public String getContrasena() {
 		return contrasena;
 	}
 
 
-	public void setContraseña(String contraseña) {
-		this.contrasena = contraseña;
+
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
+	}
+
+
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
+	}
+
+
+
+	public byte getTipo_usuario() {
+		return tipo_usuario;
+	}
+
+
+
+	public void setTipo_usuario(byte tipo_usuario) {
+		this.tipo_usuario = tipo_usuario;
 	}
 
 

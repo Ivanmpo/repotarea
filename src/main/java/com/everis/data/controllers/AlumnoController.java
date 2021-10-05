@@ -43,7 +43,7 @@ public class AlumnoController {
 	@RequestMapping(value="/alumno/crear", method =RequestMethod.POST)
 	public String crear(@Valid @ModelAttribute("usuario") Alumno alumno, RedirectAttributes attrs) {
 		as.crearAlumno(alumno);
-		attrs.addFlashAttribute("message", "Usuario Creado");
+		attrs.addFlashAttribute("message", "Alumno Creado");
 		return "redirect:/admin/alumnos";
 	}
 	
@@ -59,7 +59,7 @@ public class AlumnoController {
 	@RequestMapping(value="/alumno/actualizar", method=RequestMethod.PUT)
 	public String actualizar(@Valid @ModelAttribute("alumno") Alumno alumno, RedirectAttributes attrs) {
 		as.modificarAlumno(alumno);
-		attrs.addFlashAttribute("message", "Usuario Modificado");
+		attrs.addFlashAttribute("message", "Alumno Modificado");
 		return "redirect:/admin/alumnos";
 	}
 	
@@ -67,7 +67,7 @@ public class AlumnoController {
 	@RequestMapping(value="/alumno/eliminar/{id}", method = RequestMethod.GET)
 	public String eliminar(@PathVariable("id") Long id, Model model, RedirectAttributes attrs) {
 		as.eliminarAlumno(id);
-		attrs.addFlashAttribute("message", "Usuario Eliminado");
+		attrs.addFlashAttribute("message", "Alumno Eliminado");
 		return "redirect:/admin/alumnos";
 	}
 	
