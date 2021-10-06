@@ -22,10 +22,10 @@ public class CuentaService {
 
 
 	public List<Cuenta> findAll() {
-		return cr.findAll();
+		return cr.findAllByTipoUsuario((byte) 2 );
 	}
 	
-	public Cuenta crearCuenta(@Valid Cuenta cuenta) {
+	public Cuenta crearCuenta(@Valid Cuenta cuenta) { 
 		String hashed = BCrypt.hashpw(cuenta.getContrasena(), BCrypt.gensalt());
 		cuenta.setContrasena(hashed);
 		return cr.save(cuenta);

@@ -13,14 +13,21 @@
 
 	<div class="container">
 
-		<div class="row justify-content-md-center">
-		<h1>Bienvenido/a a Everis Academy</h1>
+		<div class="row justify-content-md-center my-5">
+		
 			<div class="col col-md-6">
 				<div class="card">
   					<div class="card-body">
 	  					<div class="row justify-content-md-center">
+	  						<h1 class="mb-5">Bienvenido/a a Everis Academy</h1>
+							<c:if test="${message!=null}">
+								<div class="alert alert-primary alert-dismissible fade show" role="alert">
+									<c:out value="${message}" /> 
+									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+								</div>
+							</c:if>
 	  						<div class="col col-md-6">
-								<form action="/admin/cuentas/ingresar" method="post">
+								<form action="/ingresar" method="post">
 									<div class="mb-3">
 										<label for="nombreUsuario">Usuario</label>
 										<input type="text" id="nombreUsuario" name="nombreUsuario" placeholder="Nombre de Usuario" class="form-control"/>
@@ -48,5 +55,7 @@
 		
 		
 	</div>
+	
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
 </body>
 </html>

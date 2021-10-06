@@ -18,17 +18,17 @@
 		<form:hidden path="id"/>
 		<div class="row g-3">
 			<div class="col-md-6">
-				<form:label path="nombre_usuario">Nombre de Usuario</form:label>
-				<form:input type="text" id="nombre_usuario" path="nombre_usuario" class="form-control"/>
+				<form:label path="nombreUsuario">Nombre de Usuario</form:label>
+				<form:input type="text" id="nombreUsuario" path="nombreUsuario" class="form-control"/>
 			</div>
 			<div class="col-md-6">
-				<form:label path="contrasena">Contraseña</form:label>
-				<form:input type="text" id="contrasena" path="contrasena" class="form-control"/>
+				<label for="contrasena">Nueva Contraseña</label>
+				<input type="text" id="contrasena" name="contrasena" class="form-control"/>
 			</div>
 			<div class="col-md-6">
 				<form:select path="activo" items="${activoList}" class="form-select" />
 			</div>
-			<!--<form:hidden path="tipo_usuario" value="2"/>-->
+			<form:hidden path="tipoUsuario"/>
 			<div class="col-md-12">
 				<input type="submit" value="Actualizar Usuario"  class="btn btn-primary">
 			</div>

@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,39 +40,13 @@ public class CuentaController {
 		return "listado_usuarios.jsp";
 	}
 
-	@RequestMapping("/login")
-	public String login() {
-		return "login.jsp";
-	}
 	
-	/*
-	@RequestMapping("/logout")
-	public String logout(HttpSession session) {
-		if(session.getAttribute("userId")!=null  ) {
-			session.invalidate(); //Matamos todas las variables de session
-		}
-		return "redirect:/login";
-	}
-	*/
-	@RequestMapping("/ingresar")
-	public String ingresar(@RequestParam("nombreUsuario") String usuario, 
-							@RequestParam("password") String password, 
-							HttpSession session ) {
-		boolean existeUsuario = cs.validarCuenta(usuario, password);
-		if(existeUsuario) {
-			Cuenta user = cs.findByNombreUsuario(usuario);
-			//guardando un elemento en session
-			session.setAttribute("userId", user.getId());
-			return "home.jsp";
-		}
-		return "redirect:/admin/cuentas/";
-	}
 	
 	
 	//Crear
 	@RequestMapping(value="/crear", method =RequestMethod.POST)
 	public String crear(@Valid @ModelAttribute("cuenta") Cuenta cuenta, RedirectAttributes attrs) {
-		cuenta.settipoUsuario((byte) 2);
+		cuenta.setTipoUsuario((byte) 2);
 		cs.crearCuenta(cuenta);
 		attrs.addFlashAttribute("message", "Usuario Creado");
 		return "redirect:/admin/cuentas/";
@@ -91,7 +66,10 @@ public class CuentaController {
 	}
 		
 	@RequestMapping(value="/actualizar", method=RequestMethod.PUT)
-	public String actualizar(@Valid @ModelAttribute("cuenta") Cuenta cuenta, RedirectAttributes attrs) {
+	public String actualizar(@Valid @ModelAttribute("cuenta") Cuenta cuenta, RedirectAttributes attrs, @RequestParam(value="contrasena", required=false) String contrasena) {
+		if(contrasena!=null && !contrasena.isBlank() && !contrasena.isEmpty()) {
+			cuenta.setContrasena(BCrypt.hashpw(contrasena, BCrypt.gensalt()));
+		}
 		cs.modificarCuenta(cuenta);
 		attrs.addFlashAttribute("message", "Usuario Modificado");
 		return "redirect:/admin/cuentas/";

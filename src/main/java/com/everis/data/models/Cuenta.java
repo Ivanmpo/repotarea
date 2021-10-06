@@ -64,13 +64,13 @@ public class Cuenta {
 
 
 
-	public String getnombreUsuario() {
+	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
 
 
 
-	public void setnombreUsuario(String nombreUsuario) {
+	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
 
@@ -100,13 +100,13 @@ public class Cuenta {
 
 
 
-	public byte gettipoUsuario() {
-		return tipoUsuario;
+	public byte getTipoUsuario() {
+		return this.tipoUsuario;
 	}
 
 
 
-	public void settipoUsuario(byte tipoUsuario) {
+	public void setTipoUsuario(byte tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
 
