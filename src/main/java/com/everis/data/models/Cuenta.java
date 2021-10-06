@@ -19,9 +19,9 @@ public class Cuenta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // autoincrementar
 	private Long id;
-	private String nombre_usuario;
+	private String nombreUsuario;
 	private String contrasena;
-	private byte tipo_usuario;
+	private byte tipoUsuario;
 	private boolean activo;
 
 	//Fechas
@@ -43,11 +43,12 @@ public class Cuenta {
 
 
 
-	public Cuenta(String nombre_usuario, String contraseña, byte tipo_usuario) {
+	public Cuenta(String nombreUsuario, String contraseña, byte tipoUsuario) {
 		super();
-		this.nombre_usuario = nombre_usuario;
+		this.nombreUsuario = nombreUsuario;
 		this.contrasena = contraseña;
-		this.tipo_usuario=tipo_usuario;
+		this.tipoUsuario=tipoUsuario;
+		this.activo = true;
 	}
 
 
@@ -63,14 +64,14 @@ public class Cuenta {
 
 
 
-	public String getNombre_usuario() {
-		return nombre_usuario;
+	public String getnombreUsuario() {
+		return nombreUsuario;
 	}
 
 
 
-	public void setNombre_usuario(String nombre_usuario) {
-		this.nombre_usuario = nombre_usuario;
+	public void setnombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
 	}
 
 
@@ -99,14 +100,14 @@ public class Cuenta {
 
 
 
-	public byte getTipo_usuario() {
-		return tipo_usuario;
+	public byte gettipoUsuario() {
+		return tipoUsuario;
 	}
 
 
 
-	public void setTipo_usuario(byte tipo_usuario) {
-		this.tipo_usuario = tipo_usuario;
+	public void settipoUsuario(byte tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 
 

@@ -3,7 +3,7 @@ package com.everis.data.controllers;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -37,13 +38,13 @@ public class CuentaController {
 		model.addAttribute("lista_usuarios", cs.findAll());
 		return "listado_usuarios.jsp";
 	}
-	/*
+
 	@RequestMapping("/login")
 	public String login() {
 		return "login.jsp";
 	}
 	
-	
+	/*
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		if(session.getAttribute("userId")!=null  ) {
@@ -51,18 +52,26 @@ public class CuentaController {
 		}
 		return "redirect:/login";
 	}
-	
-	@RequestMapping("/ingresar")
-	public String ingresar(@RequestParam("usuario") String usuario, @RequestParam("password") String password, HttpSession session ) {
-
-		return "redirect:/login";
-	}
 	*/
+	@RequestMapping("/ingresar")
+	public String ingresar(@RequestParam("nombreUsuario") String usuario, 
+							@RequestParam("password") String password, 
+							HttpSession session ) {
+		boolean existeUsuario = cs.validarCuenta(usuario, password);
+		if(existeUsuario) {
+			Cuenta user = cs.findByNombreUsuario(usuario);
+			//guardando un elemento en session
+			session.setAttribute("userId", user.getId());
+			return "home.jsp";
+		}
+		return "redirect:/admin/cuentas/";
+	}
+	
 	
 	//Crear
 	@RequestMapping(value="/crear", method =RequestMethod.POST)
 	public String crear(@Valid @ModelAttribute("cuenta") Cuenta cuenta, RedirectAttributes attrs) {
-		cuenta.setTipo_usuario((byte) 2);
+		cuenta.settipoUsuario((byte) 2);
 		cs.crearCuenta(cuenta);
 		attrs.addFlashAttribute("message", "Usuario Creado");
 		return "redirect:/admin/cuentas/";

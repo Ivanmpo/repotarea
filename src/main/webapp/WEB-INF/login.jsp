@@ -17,14 +17,13 @@
 		<h1>Bienvenido/a a Everis Academy</h1>
 			<div class="col col-md-6">
 				<div class="card">
-				
   					<div class="card-body">
 	  					<div class="row justify-content-md-center">
 	  						<div class="col col-md-6">
-								<form action="/ingresar" method="post">
+								<form action="/admin/cuentas/ingresar" method="post">
 									<div class="mb-3">
-										<label for="usuario">Usuario</label>
-										<input type="text" id="usuario" name="usuario" placeholder="Nombre de Usuario" class="form-control"/>
+										<label for="nombreUsuario">Usuario</label>
+										<input type="text" id="nombreUsuario" name="nombreUsuario" placeholder="Nombre de Usuario" class="form-control"/>
 									</div>
 									<div class="mb-3">
 										<label for="password">Password:</label>
@@ -38,22 +37,15 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				
-				
-				
-				
+				</div>			
 			</div>
-			
-
 		</div>
-
-
 		<c:if test="${not empty mensaje}">
 			<div class="alert alert-primary" role="alert">
 				<c:out value="${mensaje}"/>
 			</div>
 		</c:if>
+		
 		
 	</div>
 </body>

@@ -13,7 +13,7 @@
 Alumnos
 
 <div class="container">
-<h2>Listado de Alumnos</h2>
+<h2>Listado de Cuentas</h2>
 	<table class="table table-bordered">
 	  <thead>
 	    <tr>
@@ -27,7 +27,7 @@ Alumnos
 	  	<c:forEach items="${lista_usuarios}" var="usuario">
 				<tr>
 					<td> <c:out value="${usuario.id}"/> </td>
-					<td> <c:out value="${usuario.nombre_usuario}"></c:out> </td>
+					<td> <c:out value="${usuario.nombreUsuario}"></c:out> </td>
 					<td> 
 					<c:choose>
 					    <c:when test="${usuario.activo==false}">
@@ -66,14 +66,14 @@ Alumnos
 	<form:form action="/admin/cuentas/crear" method="POST" modelAttribute="cuenta">
 		<div class="row g-3">
 			<div class="col-md-6">
-				<form:label path="nombre_usuario">Nombre de Usuario</form:label>
-				<form:input type="text" id="nombre_usuario" path="nombre_usuario" class="form-control"/>
+				<form:label path="nombreUsuario">Nombre de Usuario</form:label>
+				<form:input type="text" id="nombreUsuario" path="nombreUsuario" class="form-control"/>
 			</div>
 			<div class="col-md-6">
 				<form:label path="contrasena">Contraseña</form:label>
 				<form:input type="text" id="contrasena" path="contrasena" class="form-control"/>
 			</div>
-			<!--<form:hidden path="tipo_usuario" value="2"/>-->
+			<!--<form:hidden path="tipoUsuario" value="2"/>-->
 			<div class="col-md-12">
 				<input type="submit" value="Crear Usuario"  class="btn btn-primary">
 			</div>
