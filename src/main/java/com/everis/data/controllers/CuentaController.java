@@ -1,6 +1,8 @@
 package com.everis.data.controllers;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -46,9 +48,48 @@ public class CuentaController {
 	//Crear
 	@RequestMapping(value="/crear", method =RequestMethod.POST)
 	public String crear(@Valid @ModelAttribute("cuenta") Cuenta cuenta, RedirectAttributes attrs) {
-		cuenta.setTipoUsuario((byte) 2);
-		cs.crearCuenta(cuenta);
-		attrs.addFlashAttribute("message", "Usuario Creado");
+		
+		boolean valid = true;
+		List<String> mensajes = new ArrayList<String>();
+		
+		cuenta.setNombreUsuario(cuenta.getNombreUsuario().trim()); //Eliminamos posibles espacios en blanco
+		if(!cuenta.getNombreUsuario().isBlank()) {
+			if(cuenta.getNombreUsuario().length()>0 && cuenta.getNombreUsuario().length()<11) {
+				mensajes.add("Nombre Ok");
+			}else {
+				// fuera del rango
+				mensajes.add("Nombre no puede estar fuera del rango");
+				valid =false;
+			}
+		}else {
+			// en blanco
+			mensajes.add("El nombre no puede ir en blanco");
+			valid =false;
+		}
+		
+		//cuenta.setContrasena(cuenta.getContrasena().trim()); //Eliminamos posibles espacios en blanco
+		if(!cuenta.getContrasena().isBlank()) {
+			if(cuenta.getContrasena().length()>0 && cuenta.getContrasena().length()<9) {
+				mensajes.add("Contraseña Ok");
+			}else {
+				// fuera del rango
+				mensajes.add("Contraseña no puede estar fuera del rango");
+				valid = false;
+			}
+		}else {
+			// en blanco
+			mensajes.add("La contraseña no puede ir en blanco");
+			valid = false;
+		}
+		
+		if(valid) {
+			cuenta.setTipoUsuario((byte) 2);
+			cs.crearCuenta(cuenta);	
+		}else {
+			mensajes.add("Error al crear usuario");
+		}
+		
+		attrs.addFlashAttribute("mensajes", mensajes);
 		return "redirect:/admin/cuentas/";
 	}
 	
@@ -67,11 +108,53 @@ public class CuentaController {
 		
 	@RequestMapping(value="/actualizar", method=RequestMethod.PUT)
 	public String actualizar(@Valid @ModelAttribute("cuenta") Cuenta cuenta, RedirectAttributes attrs, @RequestParam(value="contrasena", required=false) String contrasena) {
+		
+		
+		boolean valid = true;
+		List<String> mensajes = new ArrayList<String>();
+		
 		if(contrasena!=null && !contrasena.isBlank() && !contrasena.isEmpty()) {
 			cuenta.setContrasena(BCrypt.hashpw(contrasena, BCrypt.gensalt()));
 		}
-		cs.modificarCuenta(cuenta);
-		attrs.addFlashAttribute("message", "Usuario Modificado");
+		
+		cuenta.setNombreUsuario(cuenta.getNombreUsuario().trim()); //Eliminamos posibles espacios en blanco
+		if(!cuenta.getNombreUsuario().isBlank()) {
+			if(cuenta.getNombreUsuario().length()>0 && cuenta.getNombreUsuario().length()<11) {
+				mensajes.add("Nombre Ok");
+			}else {
+				// fuera del rango
+				mensajes.add("Nombre no puede estar fuera del rango");
+				valid =false;
+			}
+		}else {
+			// en blanco
+			mensajes.add("El nombre no puede ir en blanco");
+			valid =false;
+		}
+		
+		//cuenta.setContrasena(cuenta.getContrasena().trim()); //Eliminamos posibles espacios en blanco
+		if(!cuenta.getContrasena().isBlank()) {
+			if(cuenta.getContrasena().length()>0 && cuenta.getContrasena().length()<9) {
+				mensajes.add("Contraseña Ok");
+			}else {
+				// fuera del rango
+				mensajes.add("Contraseña no puede estar fuera del rango");
+				valid = false;
+			}
+		}else {
+			// en blanco
+			mensajes.add("La contraseña no puede ir en blanco");
+			valid = false;
+		}
+		
+		if(valid) {
+			cs.modificarCuenta(cuenta);
+			mensajes.add("Usuario modificado correctamente");
+		}else {
+			mensajes.add("Error al modificar usuario");
+		}
+
+		attrs.addFlashAttribute("mensajes", mensajes);
 		return "redirect:/admin/cuentas/";
 	}
 	

@@ -10,16 +10,54 @@
 <title>Listado de Alumnos en el sistema</title>
 </head>
 <body>
-Alumnos
 
-<div class="container">
+	<nav class="navbar navbar-expand-lg bg-light">
+		<div class="container-fluid">
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+				aria-controls="navbarNavDropdown" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+			        	<a class="nav-link " aria-current="page" href="/admin/home">Home</a>
+			        </li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownMenuLink" role="button"
+						data-bs-toggle="dropdown" aria-expanded="false"> Alumnos </a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+							<li><a class="dropdown-item" href="/admin/alumnos">Lista
+									de Alumnos</a></li>
+
+						</ul></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#"
+						id="navbarDropdownMenuLink" role="button"
+						data-bs-toggle="dropdown" aria-expanded="false"> Usuarios </a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+							<li><a class="dropdown-item" href="/admin/cuentas">Lista
+									de Usuarios</a></li>
+
+						</ul></li>
+
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
 	<h2>Listado de Alumnos</h2>
 	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearAlumnoModal">
 	  Crear Usuario
 	</button>
-	<c:if test="${message!=null}">
+	<c:if test="${mensajes!=null}">
 		<div class="alert alert-primary" role="alert">
-			<c:out value="${message}" /> 
+			<c:forEach items="${mensajes}" var="mensaje">
+				<p>${mensaje }</p>
+			</c:forEach>
 		</div>
 	</c:if>
 	<table class="table table-bordered">
@@ -101,8 +139,25 @@ Alumnos
 					<form:input type="text" id="ciudad" path="ciudad" class="form-control"/>
 				</div>
 				<div class="col-md-6">
-					<form:label  path="region">Región</form:label >
-					<form:input type="text" id="region" path="region" class="form-control"/>
+					<label for="region">Región</label>
+					<form:select path="region"  class="form-control">
+						<form:option value="" selected="selected" label="Seleccionar una región" />
+						<form:option value="Tarapaca" label="1 Tarapaca" />
+						<form:option value="Antofagasta" label="2 Antofagasta" />
+						<form:option value="Atacama" label="3 Atacama" />
+						<form:option value="Coquimbo" label="4 Coquimbo" />
+						<form:option value="Valparaiso" label="5 Valparaiso" />
+						<form:option value="OHiggins" label="6 O'Higgins" />
+						<form:option value="Maule" label="7 Maule" />
+						<form:option value="Bio Bio" label="8 Bio - Bio" />
+						<form:option value="Araucania" label="9 Araucania" />
+						<form:option value="Los Lagos" label="10 Los Lagos" />
+						<form:option value="Aisen" label="11 Aisen" />
+						<form:option value="Magallanes Y Antartica"  label="12 Magallanes Y Antartica" />
+						<form:option value="Metropolitana" label="13 Metropolitana" />
+						<form:option value="Los Rios" label="14 Los Rios" />
+						<form:option value="Arica y Parinacota" label="15 Arica y Parinacota" />
+					</form:select>
 				</div>
 				<div class="col-md-6">
 					<form:label  path="correo">Correo</form:label >
