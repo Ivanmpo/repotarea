@@ -53,7 +53,7 @@
 	<div class="container">
 	<h2>Listado de Alumnos</h2>
 	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#crearAlumnoModal">
-	  Crear Usuario
+	  Ingresar Alumno
 	</button>
 	<c:if test="${mensajes!=null}">
 		<div class="alert alert-primary" role="alert">
