@@ -145,7 +145,7 @@ public class AlumnoController {
 				if(this.validarRut(alumno.getRut())) {
 					mensajes.add("RUT ok");
 				}else {
-					mensajes.add("El rut no es váido");
+					mensajes.add("El rut no es válido");
 					valid =false;
 				}
 			}else {
@@ -370,7 +370,7 @@ public class AlumnoController {
 				if(this.validarRut(alumno.getRut())) {
 					mensajes.add("RUT ok");
 				}else {
-					mensajes.add("El rut no es váido");
+					mensajes.add("El rut no es válido");
 					valid =false;
 				}
 			}else {

@@ -54,11 +54,11 @@ public class CuentaController {
 		
 		cuenta.setNombreUsuario(cuenta.getNombreUsuario().trim()); //Eliminamos posibles espacios en blanco
 		if(!cuenta.getNombreUsuario().isBlank()) {
-			if(cuenta.getNombreUsuario().length()>0 && cuenta.getNombreUsuario().length()<11) {
+			if(cuenta.getNombreUsuario().length()>1 && cuenta.getNombreUsuario().length()<11) {
 				mensajes.add("Nombre Ok");
 			}else {
 				// fuera del rango
-				mensajes.add("Nombre no puede estar fuera del rango");
+				mensajes.add("Nombre no puede estar fuera del rango, desde 2 a 10 carácteres");
 				valid =false;
 			}
 		}else {
@@ -69,11 +69,11 @@ public class CuentaController {
 		
 		//cuenta.setContrasena(cuenta.getContrasena().trim()); //Eliminamos posibles espacios en blanco
 		if(!cuenta.getContrasena().isBlank()) {
-			if(cuenta.getContrasena().length()>0 && cuenta.getContrasena().length()<9) {
+			if(cuenta.getContrasena().length()>1 && cuenta.getContrasena().length()<9) {
 				mensajes.add("Contraseña Ok");
 			}else {
 				// fuera del rango
-				mensajes.add("Contraseña no puede estar fuera del rango");
+				mensajes.add("Contraseña no puede estar fuera del rango, desde 2 a 8 carácteres");
 				valid = false;
 			}
 		}else {
@@ -105,6 +105,17 @@ public class CuentaController {
 		model.addAttribute("activoList", activoList);
 		return "editar_usuario.jsp";
 	}
+	
+	@RequestMapping(value="/consultar/{id}", method = RequestMethod.GET)
+	public String consultar(@PathVariable("id") Long id, Model model) {
+		Cuenta cuenta = cs.findById(id);
+		Map<String,String> activoList = new LinkedHashMap<String,String>();
+		activoList.put("0", "Desactivado");
+		activoList.put("1", "Activo");
+		model.addAttribute("cuenta", cuenta);
+		model.addAttribute("activoList", activoList);
+		return "consultar_usuario.jsp";
+	}
 		
 	@RequestMapping(value="/actualizar", method=RequestMethod.PUT)
 	public String actualizar(@Valid @ModelAttribute("cuenta") Cuenta cuenta, RedirectAttributes attrs, @RequestParam(value="contrasena", required=false) String contrasena) {
@@ -119,11 +130,11 @@ public class CuentaController {
 		
 		cuenta.setNombreUsuario(cuenta.getNombreUsuario().trim()); //Eliminamos posibles espacios en blanco
 		if(!cuenta.getNombreUsuario().isBlank()) {
-			if(cuenta.getNombreUsuario().length()>0 && cuenta.getNombreUsuario().length()<11) {
+			if(cuenta.getNombreUsuario().length()>1 && cuenta.getNombreUsuario().length()<11) {
 				mensajes.add("Nombre Ok");
 			}else {
 				// fuera del rango
-				mensajes.add("Nombre no puede estar fuera del rango");
+				mensajes.add("Nombre no puede estar fuera del rango, desde 2 a 10 carácteres");
 				valid =false;
 			}
 		}else {
@@ -134,11 +145,11 @@ public class CuentaController {
 		
 		//cuenta.setContrasena(cuenta.getContrasena().trim()); //Eliminamos posibles espacios en blanco
 		if(!cuenta.getContrasena().isBlank()) {
-			if(cuenta.getContrasena().length()>0 && cuenta.getContrasena().length()<9) {
+			if(cuenta.getContrasena().length()>1 && cuenta.getContrasena().length()<9) {
 				mensajes.add("Contraseña Ok");
 			}else {
 				// fuera del rango
-				mensajes.add("Contraseña no puede estar fuera del rango");
+				mensajes.add("Contraseña no puede estar fuera del rango, desde 2 a 8 carácteres");
 				valid = false;
 			}
 		}else {

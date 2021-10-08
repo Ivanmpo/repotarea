@@ -32,7 +32,7 @@
 					<form:input type="text" id="apellido_paterno" path="apellido_paterno" class="form-control"/>
 				</div>
 				<div class="col-md-6">
-					<form:label path="apellido_materno">Apellido Paterno</form:label>
+					<form:label path="apellido_materno">Apellido Materno</form:label>
 					<form:input type="text" id="apellido_materno" path="apellido_materno" class="form-control"/>
 				</div>
 				<div class="col-md-6">

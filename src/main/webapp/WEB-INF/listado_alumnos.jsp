@@ -84,7 +84,7 @@
 					 	
 					 	<a href="/admin/alumno/modificar/${alumno.id}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
 					 	<a href="/admin/alumno/eliminar/${alumno.id}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-					 	<a href="/admin/alumno/consultar/${alumno.id}" class="btn btn-primary"><i class="bi bi-caret-right-square"></i></a>
+					 	<a href="/admin/alumno/consultar/${alumno.id}" class="btn btn-primary"><i class="bi bi-caret-right-fill"></i></a>
 						<!--<form action="/alumno/eliminar" method="POST">
 							<input type="hidden" name="id" value="<c:out value="${alumno.id}" />">
 							<input type="submit" value="Eliminar" class="btn btn-primary">
@@ -125,7 +125,7 @@
 					<form:input type="text" id="apellido_paterno" path="apellido_paterno" class="form-control"/>
 				</div>
 				<div class="col-md-6">
-					<form:label path="apellido_materno">Apellido Paterno</form:label>
+					<form:label path="apellido_materno">Apellido Materno</form:label>
 					<form:input type="text" id="apellido_materno" path="apellido_materno" class="form-control"/>
 				</div>
 				<div class="col-md-6">
