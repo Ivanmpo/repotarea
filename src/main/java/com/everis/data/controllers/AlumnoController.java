@@ -159,7 +159,7 @@ public class AlumnoController {
 		
 		alumno.setDireccion(alumno.getDireccion().trim()); //Eliminamos posibles espacios en blanco
 		if(!alumno.getDireccion().isBlank()) {
-			if(alumno.getDireccion().length()>0 && alumno.getDireccion().length()<81) {
+			if(alumno.getDireccion().length()>4 && alumno.getDireccion().length()<81) {
 				mensajes.add("Dirección Ok");
 			}else {
 				mensajes.add("Dirección no puede estar fuera del rango (Hasta 80 caracteres)");
@@ -262,6 +262,14 @@ public class AlumnoController {
 		model.addAttribute("alumno", alumno);
 		return "editar_alumno.jsp";
 	}
+	
+	@RequestMapping(value="/alumno/consultar/{id}", method = RequestMethod.GET)
+		public String consultar(@PathVariable("id") Long id, Model model) {
+		Alumno alumno = as.findById(id);
+		model.addAttribute("alumno", alumno);
+		return "consultar_alumno.jsp";
+	}
+	
 		
 	@RequestMapping(value="/alumno/actualizar", method=RequestMethod.PUT)
 	public String actualizar(@Valid @ModelAttribute("alumno") Alumno alumno, RedirectAttributes attrs) {
@@ -376,7 +384,7 @@ public class AlumnoController {
 		
 		alumno.setDireccion(alumno.getDireccion().trim()); //Eliminamos posibles espacios en blanco
 		if(!alumno.getDireccion().isBlank()) {
-			if(alumno.getDireccion().length()>0 && alumno.getDireccion().length()<81) {
+			if(alumno.getDireccion().length()>4 && alumno.getDireccion().length()<81) {
 				mensajes.add("Dirección Ok");
 			}else {
 				mensajes.add("Dirección no puede estar fuera del rango (Hasta 80 caracteres)");
